@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RailsDemo</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="main">
+        <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
+        <h1><%= @page_title %></h1>
+    </header>
+
+    <section class="content">
+        <nav class="side_nav">
+          <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="/questions">QUESTIONS</a></li>
+            <li><a href="/news">NEWS</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+          </ul>
+        </nav>
+
+                          <main class=' <%= controller.controller_name %>'>
+          <%= yield %>
+
+        </main>
+    </section>
+  </body>
+</html>
