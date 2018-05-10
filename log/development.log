@@ -793,3 +793,613 @@ Completed 500 Internal Server Error in 29ms (ActiveRecord: 2.7ms)
 NoMethodError (private method `add_product' called for #<Cart:0x00007fe54a3038b0>):
   
 app/controllers/line_items_controller.rb:30:in `create'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CombineItemsInCart (20180507200703)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.7ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20180507200703"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddQuantityToLineItems (20180507142022)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aline_items" ("id" integer NOT NULL PRIMARY KEY, "product_id" integer DEFAULT NULL, "cart_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "quantity" integer DEFAULT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_aline_items_on_cart_id" ON "aline_items" ("cart_id")[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_aline_items_on_product_id" ON "aline_items" ("product_id")[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "aline_items" ("id","product_id","cart_id","created_at","updated_at","quantity")
+                     SELECT "id","product_id","cart_id","created_at","updated_at","quantity" FROM "line_items"[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "line_items"[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "line_items" ("id" integer NOT NULL PRIMARY KEY, "product_id" integer DEFAULT NULL, "cart_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_line_items_on_product_id" ON "line_items" ("product_id")[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_line_items_on_cart_id" ON "line_items" ("cart_id")[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "line_items" ("id","product_id","cart_id","created_at","updated_at")
+                     SELECT "id","product_id","cart_id","created_at","updated_at" FROM "aline_items"[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aline_items"[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20180507142022"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CombineItemsInCart (20180507200703)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180507200703"]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to AddQuantityToLineItems (20180510112550)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "line_items" ADD "quantity" integer DEFAULT 1[0m
+  ↳ db/migrate/20180510112550_add_quantity_to_line_items.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180510112550"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+Migrating to CombineItemsInCart (20180507200703)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.4ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20180507200703"]]
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0@global/bin/rake:23
+Started GET "/" for 127.0.0.1 at 2018-05-10 06:53:05 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0/gems/rack-2.0.5/lib/rack/method_override.rb:22
+Processing by StoreController#index as HTML
+  Rendering store/index.html.erb within layouts/application
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) AS "size", MAX("products"."updated_at") AS timestamp FROM "products"[0m
+  ↳ app/views/store/index.html.erb:8
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."title" ASC[0m
+  ↳ app/views/store/index.html.erb:8
+  Rendered store/index.html.erb within layouts/application (252.0ms)
+Completed 200 OK in 329ms (Views: 310.7ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/line_items?product_id=3" for 127.0.0.1 at 2018-05-10 06:53:13 -0500
+Processing by LineItemsController#create as HTML
+  Parameters: {"authenticity_token"=>"oO7CZdTQgoXbbD5ddvY0v2o709Ar7xj+9L3c8tTWt/5bDMh2VRD6RRfLkwPtjmvYDW3SrJCT6lQFIln3OfofbQ==", "product_id"=>"3"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mCart Create (1.3ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2018-05-10 11:53:13.645187"], ["updated_at", "2018-05-10 11:53:13.645187"]]
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/line_items_controller.rb:29
+Completed 500 Internal Server Error in 56ms (ActiveRecord: 3.8ms)
+
+
+  
+NoMethodError (private method `add_product' called for #<Cart:0x00007f8c1cd35f40>):
+  
+app/controllers/line_items_controller.rb:30:in `create'
+Started POST "/line_items?product_id=3" for 127.0.0.1 at 2018-05-10 08:57:12 -0500
+Processing by LineItemsController#create as HTML
+  Parameters: {"authenticity_token"=>"oO7CZdTQgoXbbD5ddvY0v2o709Ar7xj+9L3c8tTWt/5bDMh2VRD6RRfLkwPtjmvYDW3SrJCT6lQFIln3OfofbQ==", "product_id"=>"3"}
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mCart Create (1.7ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2018-05-10 13:57:12.246079"], ["updated_at", "2018-05-10 13:57:12.246079"]]
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/line_items_controller.rb:29
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/line_items_controller.rb:33
+  [1m[36mLineItem Create (0.6ms)[0m  [1m[32mINSERT INTO "line_items" ("product_id", "cart_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["product_id", 3], ["cart_id", 7], ["created_at", "2018-05-10 13:57:12.304391"], ["updated_at", "2018-05-10 13:57:12.304391"]]
+  ↳ app/controllers/line_items_controller.rb:33
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/line_items_controller.rb:33
+Redirected to http://localhost:3000/carts/7
+Completed 302 Found in 108ms (ActiveRecord: 7.3ms)
+
+
+Started GET "/carts/7" for 127.0.0.1 at 2018-05-10 08:57:12 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.4ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 7]]
+  ↳ app/views/carts/show.html.erb:7
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/carts/show.html.erb:8
+  Rendered carts/show.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 68ms (Views: 62.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/carts/7" for 127.0.0.1 at 2018-05-10 08:58:19 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.1ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 7]]
+  ↳ app/views/carts/show.html.erb:7
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/carts/show.html.erb:8
+  Rendered carts/show.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 28ms (Views: 25.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 08:59:20 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 47ms (Views: 45.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/carts/1" for 127.0.0.1 at 2018-05-10 08:59:30 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.2ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 1]]
+  ↳ app/views/carts/show.html.erb:7
+  Rendered carts/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 49ms (Views: 45.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 08:59:32 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 43ms (Views: 40.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/carts/new" for 127.0.0.1 at 2018-05-10 08:59:35 -0500
+Processing by CartsController#new as HTML
+  Rendering carts/new.html.erb within layouts/application
+  Rendered carts/_form.html.erb (3.3ms)
+  Rendered carts/new.html.erb within layouts/application (6.1ms)
+Completed 200 OK in 37ms (Views: 34.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 08:59:38 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 44ms (Views: 41.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 09:02:55 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 40ms (Views: 37.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-10 09:03:07 -0500
+Processing by StoreController#index as HTML
+  Rendering store/index.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) AS "size", MAX("products"."updated_at") AS timestamp FROM "products"[0m
+  ↳ app/views/store/index.html.erb:8
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."title" ASC[0m
+  ↳ app/views/store/index.html.erb:8
+  Rendered store/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 27ms (Views: 25.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/line_items?product_id=3" for 127.0.0.1 at 2018-05-10 09:03:10 -0500
+Processing by LineItemsController#create as HTML
+  Parameters: {"authenticity_token"=>"jU9Wm3NVtgdzbvxcP9V7PgFxYxMdBlyUemcoOuD7uUN2rVyI8pXOx7/JUQKkrSRZZidib6Z6rj6L+K0/DdcR0A==", "product_id"=>"3"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mCart Create (0.4ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2018-05-10 14:03:10.429318"], ["updated_at", "2018-05-10 14:03:10.429318"]]
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/line_items_controller.rb:29
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/line_items_controller.rb:33
+  [1m[36mLineItem Create (0.5ms)[0m  [1m[32mINSERT INTO "line_items" ("product_id", "cart_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["product_id", 3], ["cart_id", 8], ["created_at", "2018-05-10 14:03:10.436064"], ["updated_at", "2018-05-10 14:03:10.436064"]]
+  ↳ app/controllers/line_items_controller.rb:33
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/line_items_controller.rb:33
+Redirected to http://localhost:3000/carts/8
+Completed 302 Found in 17ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/carts/8" for 127.0.0.1 at 2018-05-10 09:03:10 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.2ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 8]]
+  ↳ app/views/carts/show.html.erb:7
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/carts/show.html.erb:8
+  Rendered carts/show.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 65ms (Views: 62.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 09:03:18 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 38ms (Views: 36.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/carts/8/edit" for 127.0.0.1 at 2018-05-10 09:03:31 -0500
+Processing by CartsController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/edit.html.erb within layouts/application
+  Rendered carts/_form.html.erb (2.0ms)
+  Rendered carts/edit.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 47ms (Views: 42.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/carts/8" for 127.0.0.1 at 2018-05-10 09:03:37 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.2ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 8]]
+  ↳ app/views/carts/show.html.erb:7
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/carts/show.html.erb:8
+  Rendered carts/show.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 54ms (Views: 49.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 09:16:06 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.6ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (16.6ms)
+Completed 200 OK in 155ms (Views: 146.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-10 09:26:36 -0500
+Processing by StoreController#index as HTML
+  Rendering store/index.html.erb within layouts/application
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) AS "size", MAX("products"."updated_at") AS timestamp FROM "products"[0m
+  ↳ app/views/store/index.html.erb:8
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."title" ASC[0m
+  ↳ app/views/store/index.html.erb:8
+  Rendered store/index.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 111ms (Views: 103.7ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/line_items?product_id=5" for 127.0.0.1 at 2018-05-10 09:26:40 -0500
+Processing by LineItemsController#create as HTML
+  Parameters: {"authenticity_token"=>"D7wuQObhQHOg4j6su0SzaKq3QcrqHR81dhI7EUByaFS3yDrEy2c5fWf374fzR75Sjf3In//UZp1KOQ4fSJhqOQ==", "product_id"=>"5"}
+  [1m[35m (0.8ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mCart Create (0.4ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2018-05-10 14:26:40.689445"], ["updated_at", "2018-05-10 14:26:40.689445"]]
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/line_items_controller.rb:29
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/line_items_controller.rb:33
+  [1m[36mLineItem Create (1.1ms)[0m  [1m[32mINSERT INTO "line_items" ("product_id", "cart_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["product_id", 5], ["cart_id", 9], ["created_at", "2018-05-10 14:26:40.706233"], ["updated_at", "2018-05-10 14:26:40.706233"]]
+  ↳ app/controllers/line_items_controller.rb:33
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/line_items_controller.rb:33
+Redirected to http://localhost:3000/carts/9
+Completed 302 Found in 31ms (ActiveRecord: 6.4ms)
+
+
+Started GET "/carts/9" for 127.0.0.1 at 2018-05-10 09:26:40 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.3ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 9]]
+  ↳ app/views/carts/show.html.erb:7
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/carts/show.html.erb:8
+  Rendered carts/show.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 95ms (Views: 89.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 09:26:45 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 38ms (Views: 34.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 12:51:01 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 76ms (Views: 59.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/carts/9" for 127.0.0.1 at 2018-05-10 12:51:07 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.2ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 9]]
+  ↳ app/views/carts/show.html.erb:7
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/carts/show.html.erb:8
+  Rendered carts/show.html.erb within layouts/application (35.3ms)
+Completed 200 OK in 66ms (Views: 60.0ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 12:51:10 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.6ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 50ms (Views: 46.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 12:59:03 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 41ms (Views: 38.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/carts/5" for 127.0.0.1 at 2018-05-10 12:59:11 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (0.2ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 5]]
+  ↳ app/views/carts/show.html.erb:7
+  Rendered carts/show.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 40ms (Views: 37.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/carts/5/edit" for 127.0.0.1 at 2018-05-10 12:59:15 -0500
+Processing by CartsController#edit as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/edit.html.erb within layouts/application
+  Rendered carts/_form.html.erb (2.4ms)
+  Rendered carts/edit.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 42ms (Views: 38.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/carts/5" for 127.0.0.1 at 2018-05-10 12:59:18 -0500
+Processing by CartsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mCart Load (0.9ms)[0m  [1m[34mSELECT  "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/carts_controller.rb:67
+  Rendering carts/show.html.erb within layouts/application
+  [1m[36mLineItem Load (1.0ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = ?[0m  [["cart_id", 5]]
+  ↳ app/views/carts/show.html.erb:7
+  Rendered carts/show.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 46ms (Views: 41.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 12:59:19 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 48ms (Views: 45.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/news" for 127.0.0.1 at 2018-05-10 12:59:25 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/news"):
+  
+actionpack (5.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.1) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.1) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.1) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.0) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.0) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.0) lib/rails/engine.rb:524:in `call'
+puma (3.11.4) lib/puma/configuration.rb:225:in `call'
+puma (3.11.4) lib/puma/server.rb:632:in `handle_request'
+puma (3.11.4) lib/puma/server.rb:446:in `process_client'
+puma (3.11.4) lib/puma/server.rb:306:in `block in run'
+puma (3.11.4) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/carts" for 127.0.0.1 at 2018-05-10 12:59:28 -0500
+Processing by CartsController#index as HTML
+  Rendering carts/index.html.erb within layouts/application
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ app/views/carts/index.html.erb:13
+  Rendered carts/index.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 61ms (Views: 58.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-05-10 12:59:30 -0500
+Processing by StoreController#index as HTML
+  Rendering store/index.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) AS "size", MAX("products"."updated_at") AS timestamp FROM "products"[0m
+  ↳ app/views/store/index.html.erb:8
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY "products"."title" ASC[0m
+  ↳ app/views/store/index.html.erb:8
+  Rendered store/index.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 72ms (Views: 66.6ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/line_items?product_id=3" for 127.0.0.1 at 2018-05-10 12:59:34 -0500
+Processing by LineItemsController#create as HTML
+  Parameters: {"authenticity_token"=>"IrbKD5m9HUeNaAA9MyZEOon5wnUOaOnV4QRytqIpUIGawt6LtDtkSUp90RZ7JUkArrNLIBuhkH3dL0e4qsNS7A==", "product_id"=>"3"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mCart Create (0.3ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2018-05-10 17:59:34.321483"], ["updated_at", "2018-05-10 17:59:34.321483"]]
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/line_items_controller.rb:29
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.4ms)
+
+
+  
+NoMethodError (private method `add_product' called for #<Cart:0x00007f8c21769620>):
+  
+app/controllers/line_items_controller.rb:30:in `create'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CombineItemsInCart (20180510193934)
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CombineItemsInCart (20180510193934)
+  [1m[36mCart Load (0.5ms)[0m  [1m[34mSELECT "carts".* FROM "carts"[0m
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:6
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 1]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 2]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 3]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 4]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 5]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 6]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 7]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 8]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 9]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT SUM("line_items"."quantity") AS sum_quantity, "line_items"."product_id" AS line_items_product_id FROM "line_items" WHERE "line_items"."cart_id" = ? GROUP BY "line_items"."product_id"[0m  [["cart_id", 10]]
+  ↳ db/migrate/20180510193934_combine_items_in_cart.rb:8
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180510193934"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started POST "/line_items?product_id=3" for 127.0.0.1 at 2018-05-10 14:43:40 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/stefanispayde/.rvm/gems/ruby-2.5.0/gems/rack-2.0.5/lib/rack/method_override.rb:22
+Processing by LineItemsController#create as HTML
+  Parameters: {"authenticity_token"=>"IrbKD5m9HUeNaAA9MyZEOon5wnUOaOnV4QRytqIpUIGawt6LtDtkSUp90RZ7JUkArrNLIBuhkH3dL0e4qsNS7A==", "product_id"=>"3"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mCart Create (0.3ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2018-05-10 19:43:40.586901"], ["updated_at", "2018-05-10 19:43:40.586901"]]
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/concerns/current_cart.rb:8
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/line_items_controller.rb:29
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 2.3ms)
+
+
+  
+NoMethodError (private method `add_product' called for #<Cart:0x00007f8c21700058>):
+  
+app/controllers/line_items_controller.rb:30:in `create'
